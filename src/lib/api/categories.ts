@@ -3,22 +3,32 @@ import { Category } from "@/types/types";
 
 export const categoryApi = {
   getAll: async (): Promise<Category[]> => {
-    const response = await apiClient.get("/api/category");
+    const response = await apiClient.get("/api/category",{
+      withCredentials: true
+    });
     return response.data.categories;
   },
   getById: async (id: string): Promise<Category> => {
-    const response = await apiClient.get(`/api/category/${id}`);
+    const response = await apiClient.get(`/api/category/${id}`,{
+      withCredentials: true
+    });
     return response.data;
   },
   addCategory: async (category: string): Promise<Category> => {
-    const response = await apiClient.post("/api/category", {name:category});
+    const response = await apiClient.post("/api/category", {name:category},{
+      withCredentials: true
+    });
     return response.data;
   },
   deleteCategory: async (id: string): Promise<void> => {
-    await apiClient.delete(`/api/category/${id}`);
+    await apiClient.delete(`/api/category/${id}`,{
+      withCredentials: true
+    });
   },
   updateCategory: async (id: string, category: string): Promise<Category> => {
-    const response = await apiClient.put(`/api/category/${id}`, {name:category});
+    const response = await apiClient.put(`/api/category/${id}`, {name:category},{
+      withCredentials: true
+    });
     return response.data;
   }
 };
